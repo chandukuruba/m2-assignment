@@ -1,0 +1,158 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.dont-show{
+    display: none;
+}
+
+
+.sucusse-message{
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-80px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 90%;
+}
+
+
+select {
+    width: 90%;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+    margin-top: 10px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+p {
+    color: #ff0000;
+    margin: 5px 0;
+    font-size: 10px;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding:5px 10px 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+   transform: translateY(-10px);
+}
+
+input[type="submit"]{
+    background-color: #45a049;
+    display: inline;
+    width: 20%;
+    padding: 20px;
+    align-self: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    div {
+        margin: 20px;
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 480px) {
+    input,
+    select,
+    label {
+        width: 100%;
+    }
+}
+
+.gender-section {
+    margin-bottom: 20px;
+}
+
+.gender-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    align-self: flex-start;
+}
+
+.gender-radio {
+    margin-right: 5px;
+    display: inline;
+    align-self: flex-start;
+}
+
+.gender-radio-label {
+    margin-right: 15px;
+}
+
+.gender-error-message {
+    color: #ff0000;
+    margin: 5px ;
+    font-size: 14px;
+}
+
+.error{
+    outline: 1px solid red;
+}
