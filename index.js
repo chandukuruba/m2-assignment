@@ -19,11 +19,19 @@ const genderErrorMessage = document.getElementById('genderErrorMessage');
 let selectedGender=""
 const successMessage=document.getElementById("sucusse-message")
 
+
+
+//user-name
 function validateName(){
     if (userNameInput.value ==="") {
         userNameErrorMessage.textContent = 'User Name is required.';
         userNameInput.classList.add("error")
-    } else {
+    }else if ((userNameInput.value.length <5) || (userNameInput.value.length >15)){
+        userNameErrorMessage.textContent = 'User Name must be between 5 and 15 charecters in length.';
+        userNameInput.classList.add("error")
+    }
+    
+    else {
         userNameErrorMessage.textContent = '';
         userNameInput.classList.remove("error")
     }
@@ -86,11 +94,19 @@ confirmPasswordInput.addEventListener("blur",confirmPasswordValidator)
 
     // Date
     function validateDate(){
+        const userDob = new Date(dateInput.value);
+        const today = new Date();
+        const age = today.getFullYear() - userDob.getFullYear();
+
         const isValidDate = !isNaN(Date.parse(dateInput.value));
         if (dateInput.value==="" || !isValidDate) {
             dateErrorMessage.textContent = 'Date is required.';
             dateInput.classList.add("error")
-        } else {
+        }else if(age <18){
+            dateErrorMessage.textContent = 'Age Must be above 18.';
+            dateInput.classList.add("error")
+        }
+         else {
             dateErrorMessage.textContent = '';
             dateInput.classList.remove("error")
         }
@@ -131,6 +147,15 @@ confirmPasswordInput.addEventListener("blur",confirmPasswordValidator)
 
     checkboxInput.addEventListener("change",validateTerms)
 
+    function validateGender(){
+        genderInputs.forEach(each=>{
+            if(each.checked===true){
+                selectedGender=each.value
+            }
+        })``
+    }
+
+    genderInputs.forEach(gender=>gender.addEventListener("change",validateGender))
 
 function onSubmitForm(e){
     e.preventDefault()
@@ -165,7 +190,7 @@ function onSubmitForm(e){
         dateErrorMessage.textContent = 'Date is required.';
         return;
     }
-    if (!isAnyGenderSelected){
+    if (selectedGender===""){
         genderErrorMessage.textContent="Gender is required. "
         return;
     }
@@ -178,6 +203,17 @@ function onSubmitForm(e){
         return;
     }
 
+    successMessage.innerHTML=`
+    <div class="user-details">
+    <p>User Name : ${userNameInput.value}</p>
+    <p>Email : ${emailInput.value}</p>
+    <p>Password : ${"*".repeat(passwordInput.value.length)}</p>
+    <p>Date of Birth : ${dateInput.value}</p>
+    <p>Gender : ${selectedGender}</p>
+    </div>
+    `
+    successMessage.classList.add("sucusse-message")
+
     userNameInput.value=""
     emailInput.value=""
     passwordInput.value=""
@@ -187,10 +223,13 @@ function onSubmitForm(e){
     dateInput.value=""
     checkboxInput.checked=false
     successMessage.classList.remove("dont-show")
-    successMessage.classList.add("sucusse-message")
-
-
-
+    document.addEventListener("animationend",(e)=>{
+        e.target.classList.remove("sucusse-message")
+        successMessage.innerHTML=""
+})
+    
 }
     
 form.addEventListener("submit",onSubmitForm)
+
+
